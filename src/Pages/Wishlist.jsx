@@ -11,7 +11,7 @@ const Wishlist = () => {
 
     // sort data 
 
-      const sortedItem = () => {
+      const sortedItem = (() => {
         if(sortOrder === 'price-asc'){
             return [...wishList].sort((a,b)=> a.price - b.price)
         }
@@ -22,7 +22,7 @@ const Wishlist = () => {
 
             return  wishList
         }
-    }
+    })()
     return (
         <div>
             <div className='flex flex-col border-b-2 pb-4 border-neutral-200 gap-4 my-8 justify-between items-center mx-20  md:flex-row'>
@@ -37,7 +37,7 @@ const Wishlist = () => {
        </label>
             </div>
             <div className='space-y-3'>
-                {sortedItem().map(p=>
+                {sortedItem.map(p=>
                     <div className="">
   <div className="flex items-center justify-around gap-4 border p-8 ">
    <div className='flex flex-col gap-3'>
