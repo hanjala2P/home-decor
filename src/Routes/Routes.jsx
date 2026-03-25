@@ -24,7 +24,7 @@ const router =createBrowserRouter([
           Component:AllProducts
         },
         {
-          index:true,
+        index:true,
         path:'/products',
         loader:()=>fetch('/Data.json'),
         Component:Products,
