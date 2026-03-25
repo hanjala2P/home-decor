@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link, } from 'react-router';
 // import { useLoaderData } from 'react-router';
 
 const Product = ({singledata}) => {
-  // console.log('data',singledata)
+  
+  
   // const data = useLoaderData([])
   // console.log('fff',data)
-  const {productName,category,image,review,tags}=singledata
+  const {productName,category,image,review,tags,id}=singledata
+  // console.log('data',singledata)
     return (
         <div>
            <div className="card bg-base-100 px-4 mx-20 mt-6 shadow-sm">
@@ -24,8 +27,9 @@ const Product = ({singledata}) => {
     <div className="card-actions justify-end">
       {
         tags.map(tag=> (<button className="badge badge-outline">{tag}</button>))
-      },
+      }
     </div>
+  <Link to={`/productDetails/${id}`} className='btn btn-primary'>View Details</Link>
   </div>
 </div>
         </div>

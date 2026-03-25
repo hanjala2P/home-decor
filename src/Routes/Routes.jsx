@@ -8,6 +8,9 @@ import Hero from '../Components/Hero';
 import Layout from '../Layout/Layout';
 import ErrorPage from '../Pages/ErrorPage';
 import AllProducts from '../Pages/AllProducts';
+import ProductDetails from '../Pages/ProductDetails';
+import Wishlist from '../Pages/Wishlist';
+
 
 
 const router =createBrowserRouter([
@@ -19,33 +22,35 @@ const router =createBrowserRouter([
        hydrateFallbackElement:<h2>Loading...</h2>,
        children:[
         {
-         
-          path:'/allProducts',
-          Component:AllProducts
-        },
-        {
         index:true,
         path:'/products',
         loader:()=>fetch('/Data.json'),
         Component:Products,
         
       },
-        {
-        path:'/product/:id',
-        loader:()=>fetch('/Data.json'),
-        Component:Products,
-        
-      },
-        {
+        {  
+          path:'/allProducts',
+          Component:AllProducts
+        },
+           {
         path:'/about',
         Component:About
+        
+      },
+           {
+        path:'/wishlist',
+        Component:Wishlist
         
       },
         {
         path:'/about',
         Component:Product
         
-      },     
+      },   
+      {
+        path:'/productDetails/:id',
+        Component:ProductDetails
+      }  
        ]
         
     },

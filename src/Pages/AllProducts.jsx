@@ -12,7 +12,7 @@ const AllProducts = () => {
     product.filter(Product=>
     Product.productName.toLocaleLowerCase().includes(term))
     :product
-    console.log(searchProducts)
+    // console.log(searchProducts)
     return (
         <div className='mx-20 mt-12 mb-16 '>
             <h2 className='text-2xl font-bold'>
