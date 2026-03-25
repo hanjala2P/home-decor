@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link} from 'react-router';
 import Product from './Product';
 import useProducts from '../Hooks/useProducts';
 
 const Products = () => {
-    const data = useLoaderData([]);
-    const {products,loading,err} =useProducts();
-    console.log(products)
-    const featuredProduct =data.slice(0, 6)
+    // const data = useLoaderData();
+    const {product,loading,error} =useProducts();
+
+    const featuredProduct =product.slice(0, 6)
     // console.log(data)
     return (
         <div >
