@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, } from 'react-router';
+import SkeletionLoader from '../Components/SkeletionLoader';
 // import { useLoaderData } from 'react-router';
 
 const Product = ({singledata}) => {
@@ -11,7 +12,9 @@ const Product = ({singledata}) => {
   // console.log('data',singledata)
     return (
         <div>
-           <div className="card bg-base-100 px-4 mx-20 mt-6 shadow-sm">
+             {/* <SkeletionLoader></SkeletionLoader> */}
+           <div className="card bg-base-100 px-4 mt-6 shadow-sm">
+         
   <figure>
     <img 
     className='h-68 w-full'

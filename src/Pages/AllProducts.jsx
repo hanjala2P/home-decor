@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import useProducts from '../Hooks/useProducts';
 import Product from './Product';
+import SkeletionLoader from '../Components/SkeletionLoader';
 
 const AllProducts = () => {
-    const{ product} = useProducts()
+    const{loading, product} = useProducts()
     const [search,setSearch]=useState('')
 
     const term = search?.trim()?.toLocaleLowerCase()
@@ -28,11 +29,13 @@ const AllProducts = () => {
                   placeholder='Search' className=" input"></input>
             </label>
             </div>
-            <div className='grid mx-auto  items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 '>
+           {
+            loading? <SkeletionLoader count={9}/> : <div className='grid mx-auto  items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 '>
                 {
                     searchProducts.map(singledata => (<Product key={singledata.productId} singledata={singledata}></Product>))
                 }
             </div>
+           }
         </div>
         </div>
     );
