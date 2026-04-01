@@ -31,6 +31,19 @@ const Wishlist = () => {
             setWishList(prev => prev.filter (p=> p.id !== id))
                localStorage.setItem('wishlist',JSON.stringify(updatedList))
        }
+    //    genarete chart data
+    const totalsByCategory ={}
+        wishList.forEach(product =>{
+            const category = product.category
+            totalsByCategory[category] = (totalsByCategory[category]|| 0) + product.price
+        })
+
+        const chartData = Object.keys(totalsByCategory).map(category => ({
+            category,
+            total : totalsByCategory[category],
+        }))
+        console.log(chartData)
+    
 
     return (
         <div>
@@ -73,17 +86,17 @@ const Wishlist = () => {
                     <BarChart   
                      width={500}
                      height={300}
-                     data={wishList}
+                     data={chartData}
                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3"/>
-                        <XAxis dataKey="category"/>
-                        <YAxis dataKey="price"/>
+                        <XAxis />
+                        <YAxis />
                         <Tooltip/>
                         <Legend></Legend>
                        
                        <Bar 
-                       dataKey="price" 
+                       dataKey="total" 
                        fill="#8884d8" 
                        activeBar={<Rectangle fill='gold' stroke='purple'/>}
                        />
