@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import useProducts from '../Hooks/useProducts';
+import { updateList } from '../Utils/LocalStorage';
 
 
 const ProductDetails = () => {
@@ -12,23 +13,23 @@ const ProductDetails = () => {
     if(loading)return <p>Loading...</p>
       const {productName,category,image,review,}=produc || {}
 
-      const handleWishlist = ()=>{
+      // const handleWishlist = ()=>{
         
-        const existingList =JSON.parse(localStorage.getItem('wishlist'))
-            let updatedList =[]
+      //   const existingList =JSON.parse(localStorage.getItem('wishlist'))
+      //       let updatedList =[]
 
-            if(existingList){
-              const isDuplicate = existingList.some(p=> p.id === produc.id)
-              if(isDuplicate)return alert('data already in wishlist ')
-              updatedList =[...existingList,produc]
-            }
+      //       if(existingList){
+      //         const isDuplicate = existingList.some(p=> p.id === produc.id)
+      //         if(isDuplicate)return alert('data already in wishlist ')
+      //         updatedList =[...existingList,produc]
+      //       }
 
-            else{
-              updatedList.push(produc)
-            }
+      //       else{
+      //         updatedList.push(produc)
+      //       }
 
-               localStorage.setItem('wishlist',JSON.stringify(updatedList))
-      }
+      //          localStorage.setItem('wishlist',JSON.stringify(updatedList))
+      // }
 
 
     return (
@@ -49,7 +50,7 @@ const ProductDetails = () => {
     </h2>
     <p>{review}</p>
     <div className="card-actions justify-end">
-     <button onClick={handleWishlist} className='btn btn-outline'>Add to Wishlist</button>
+     <button onClick={()=> updateList(produc)} className='btn btn-outline'>Add to Wishlist</button>
     </div>
 
   </div>

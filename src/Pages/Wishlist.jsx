@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { loadWishList, removeFromWishList } from '../Utils/LocalStorage';
 
 const Wishlist = () => {
-    const [wishList,setWishList]=useState([])
+    const [wishList,setWishList]=useState(()=> loadWishList())
     const [sortOrder,setSortOrder]=useState('none')
-    useEffect(()=>{
-        const savedList =JSON.parse(localStorage.getItem('wishlist'))
-        if(savedList)setWishList(savedList)
-    },[]
-    )
+    // useEffect(()=>{
+    //     const savedList =JSON.parse(localStorage.getItem('wishlist'))
+    //     if(savedList)setWishList(savedList)
+    // },[]
+    // )
+
+    // check if no data in wishlist 
+    if(!wishList.length) return <h2 className='text-3xl font-bold text-center mt-20 mb-16'>No product in wishlist</h2>
 
     // sort data 
 
@@ -25,11 +29,9 @@ const Wishlist = () => {
         }
     })()
        const handleRemove=(id)=>{
-             const existingList =JSON.parse(localStorage.getItem('wishlist'))
-            let updatedList =existingList.filter(p=> p.id !== id)
+        removeFromWishList(id)
         // ui instantly update
             setWishList(prev => prev.filter (p=> p.id !== id))
-               localStorage.setItem('wishlist',JSON.stringify(updatedList))
        }
     //    genarete chart data
     const totalsByCategory ={}
@@ -46,8 +48,8 @@ const Wishlist = () => {
     
 
     return (
-        <div>
-            <div className='flex flex-col border-b-2 pb-4 border-neutral-200 gap-4 my-8 justify-between items-center mx-20  md:flex-row'>
+        <div className=' mx-20'>
+            <div className='flex flex-col border-b-2 pb-4 border-neutral-200 gap-4 my-8 justify-between items-center  md:flex-row'>
                 <h2 className='text-3xl font-bold '>Featured Products <span className='text-sm text-neutral-500 font-normal'>( {wishList.length}) product found</span></h2>
         
        <label className='form-control'>
@@ -61,7 +63,7 @@ const Wishlist = () => {
             <div className='space-y-3'>
                 {sortedItem.map(p=>
                     <div className="">
-  <div className="flex items-center justify-around gap-4 border p-8 ">
+  <div className="flex items-center justify-around gap-4 border rounded-xl p-8 ">
    <div className='flex flex-col gap-3'>
      <img
       src={p.image}
@@ -79,7 +81,7 @@ const Wishlist = () => {
                 )}
             </div>
             {/* chart */}
-            <div className='space-y-3'>
+            <div className='space-y-3 my-8'>
                 <h3 className='text-xl font-semibold'>Whislist Summery</h3>
                 <div className='bg-base-100 border rounded-xl border-neutral-400 p-4 h-80'>
                 <ResponsiveContainer width="100%" height="100%">
