@@ -13,7 +13,7 @@ const ProductDetails = () => {
       const {productName,category,image,review,}=produc || {}
 
       const handleWishlist = ()=>{
-
+        
         const existingList =JSON.parse(localStorage.getItem('wishlist'))
             let updatedList =[]
 
